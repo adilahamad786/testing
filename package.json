@@ -1,0 +1,11 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "This is a testing code!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Adil Ahamad",
+  "license": "ISC"
+}
