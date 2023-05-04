@@ -51,13 +51,29 @@ const myPromise3 = new Promise((resolve, reject) => {
 //   console.log(values);
 // });
 
-let result = Promise.allSettled([myPromise1, myPromise2, myPromise3]);
-result
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+
+// let result = Promise.allSettled([myPromise1, myPromise2, myPromise3]);
+// result
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err));
 
 // Output : [
 //     { status: 'fulfilled', value: 'Promise has resolved!' },
 //     { status: 'fulfilled', value: 'Promise has resolved!' },
 //     { status: 'rejected', reason: 'Promise has rejected!' }
 // ]
+
+
+let result1 = Promise.any([myPromise1, myPromise2, myPromise3]); // give result as first resolved value.
+result1
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+// Output : Promise has resolved!
+
+let result2 = Promise.any([myPromise3]); // When all promises are rejected
+result2
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+// Output : [AggregateError: All promises were rejected] {
+//   [errors]: [ 'Promise has rejected!' ]
+// }
