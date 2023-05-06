@@ -144,26 +144,46 @@ const async = require('async');
 // All task completed!
 
 
-async.waterfall([
-    function(callback) {
-        console.log("First")
-        callback(null, 'one', 'two');
-    },
-    function(arg1, arg2, callback) {
-        // arg1 now equals 'one' and arg2 now equals 'two'
-        console.log("Second", arg1, arg2)
-        callback(null, 'three');
-    },
-    function(arg1, callback) {
-        // arg1 now equals 'three'
-        console.log("Third", arg1)
-        callback(null, 'done');
-    }
-], function (err, result) {
-    // result now equals 'done'
-});
+// async.waterfall([
+//     function(callback) {
+//         console.log("First")
+//         callback(null, 'one', 'two');
+//     },
+//     function(arg1, arg2, callback) {
+//         // arg1 now equals 'one' and arg2 now equals 'two'
+//         console.log("Second", arg1, arg2)
+//         callback(null, 'three');
+//     },
+//     function(arg1, callback) {
+//         // arg1 now equals 'three'
+//         console.log("Third", arg1)
+//         callback(null, 'done');
+//     }
+// ], function (err, result) {
+//     // result now equals 'done'
+// });
 
 // Output :
 // First
 // Second one two
 // Third three
+
+
+// Taking input using command line arguments
+
+let inputFromArguemnt = process.argv;
+console.log(inputFromArguemnt);
+console.log(process.argv[2]);
+console.log(process.argv[3]);
+
+// Input : node index.js firstArgInput secondArgInput
+
+// Output :
+// [
+//     'G:\\nodejs\\node.exe',
+//     'C:\\Users\\Adil Ahamad\\Desktop\\testing\\index.js',
+//     'firstArgInput',
+//     'secondArgInput'
+// ]
+// firstArgInput
+// secondArgInput
