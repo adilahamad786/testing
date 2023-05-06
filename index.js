@@ -94,20 +94,51 @@ let result4 = Promise.race([myPromise3, myPromise2, myPromise1]);
 // USING async UTILITY MODULE
 const async = require('async');
 
-let parallel = async.parallel([
-    function fun(cb) {
-        cb(null, "Value")
-    },
-    function (cb) {
-        cb(null, "Val")
-    },
-    (cb) => cb(null, "va")
-], function (error, result) {
-    if (error)
-        console.log(error);
-    else
-        console.log(result);
-})
+// let parallel = async.parallel([
+//     function fun(cb) {
+//         cb(null, "Value")
+//     },
+//     function (cb) {
+//         cb(null, "Val")
+//     },
+//     (cb) => cb(null, "va")
+// ], function (error, result) {
+//     if (error)
+//         console.log(error);
+//     else
+//         console.log(result);
+// })
 
-console.log(parallel);
+// console.log(parallel);
 // Output : [ 'Value', 'Val', 'va' ]
+
+
+let queue = async.queue((task, callback) => {
+    // if (task.task === "My task 3") { throw Error("Task is failed!") }
+    console.log(task);
+    if (task.fun)
+        task.fun();
+    callback();
+}, 1)
+
+queue.drain(() => console.log("All task completed!"));
+
+// queue.error(function (error, task) { console.log("An error is occuring!") });
+
+queue.push({ task : "My task 1"})
+queue.push({ task : "My task 2"}, function () { console.log("My task 2 is finished!")})
+queue.push({ task : "My task 3"}, function (error) { if (error) { console.log("My task 3 has failed!")} })
+queue.push({ task : "My task 4"})
+queue.push({ task : "My task 5"})
+queue.push({ fun : () => console.log("This is a function task!")})
+
+// Output :
+// { task: 'My task 1' }
+// { task: 'My task 2' }
+// My task 2 is finished!
+// { task: 'My task 3' }
+// { task: 'My task 4' }
+// { task: 'My task 5' }
+// { fun: [Function: fun] }
+// This is a function task!
+// All task completed!
