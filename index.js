@@ -1,25 +1,19 @@
-let flag = true;
+// let flag = true;
 
-const myPromise1 = new Promise((resolve, reject) => {
-    if (flag)
-        resolve("Promise has resolved!");
-    else
-        reject("Promise has rejected!");
-});
+// const myPromise1 = new Promise((resolve, reject) => {
+//   if (flag) resolve("Promise has resolved!");
+//   else reject("Promise has rejected!");
+// });
 
-const myPromise2 = new Promise((resolve, reject) => {
-    if (flag)
-        resolve("Promise has resolved!");
-    else
-        reject("Promise has rejected!");
-});
+// const myPromise2 = new Promise((resolve, reject) => {
+//   if (flag) resolve("Promise has resolved!");
+//   else reject("Promise has rejected!");
+// });
 
-const myPromise3 = new Promise((resolve, reject) => {
-    if (false)
-        resolve("Promise has resolved!");
-    else
-        reject("Promise has rejected!");
-});
+// const myPromise3 = new Promise((resolve, reject) => {
+//   if (false) resolve("Promise has resolved!");
+//   else reject("Promise has rejected!");
+// });
 
 // // async function fun () {
 // //     try {
@@ -51,7 +45,6 @@ const myPromise3 = new Promise((resolve, reject) => {
 //   console.log(values);
 // });
 
-
 // let result = Promise.allSettled([myPromise1, myPromise2, myPromise3]);
 // result
 //     .then(res => console.log(res))
@@ -63,36 +56,32 @@ const myPromise3 = new Promise((resolve, reject) => {
 //     { status: 'rejected', reason: 'Promise has rejected!' }
 // ]
 
-
-let result1 = Promise.any([myPromise1, myPromise2, myPromise3]); // give result as first resolved value.
+// let result1 = Promise.any([myPromise1, myPromise2, myPromise3]); // give result as first resolved value.
 // result1
 //     .then(res => console.log(res))
 //     .catch(err => console.log(err));
 // Output : Promise has resolved!
 
-let result2 = Promise.any([myPromise3]); // When all promises are rejected
+// let result2 = Promise.any([myPromise3]); // When all promises are rejected
 // result2
 //     .then(res => console.log(res))
 //     .catch(err => console.log(err));
 // Output : Promise has rejected!
 
-
-
-let result3 = Promise.race([myPromise1, myPromise2, myPromise3]);
+// let result3 = Promise.race([myPromise1, myPromise2, myPromise3]);
 // result3
 //     .then(res => console.log(res))
 //     .catch(err => console.log(err));
 // Output : Promise has resolved!
 
-let result4 = Promise.race([myPromise3, myPromise2, myPromise1]);
+// let result4 = Promise.race([myPromise3, myPromise2, myPromise1]);
 // result4
 //     .then(res => console.log(res))
 //     .catch(err => console.log(err));
 // Output : Promise has rejected!
 
-
 // USING async UTILITY MODULE
-const async = require('async');
+// const async = require("async");
 
 // let parallel = async.parallel([
 //     function fun(cb) {
@@ -169,6 +158,7 @@ const async = require('async');
 // Third three
 
 
+
 // Taking input using command line arguments
 
 // let inputFromArguemnt = process.argv;
@@ -189,25 +179,62 @@ const async = require('async');
 // secondArgInput
 
 
-
 // Working with JSON data and Object Literals, JSON, which stands for JavaScript Object Notation
-let objectLiteral = {
-    name : "Adil Ahamad",
-    email : "adilahamad@email.com"
-}
-console.log(objectLiteral);
+// let objectLiteral = {
+//     name : "Adil Ahamad",
+//     email : "adilahamad@email.com"
+// }
+// console.log(objectLiteral);
 
-let convertIntoJson = JSON.stringify(objectLiteral);
-console.log(convertIntoJson);
+// let convertIntoJson = JSON.stringify(objectLiteral);
+// console.log(convertIntoJson);
 
-let convertIntoObjectLiteral = JSON.parse(convertIntoJson);
-console.log(convertIntoObjectLiteral);
+// let convertIntoObjectLiteral = JSON.parse(convertIntoJson);
+// console.log(convertIntoObjectLiteral);
 
-let str = toString(objectLiteral); // objectLiteral.toString();
-console.log(str);
+// let str = toString(objectLiteral); // objectLiteral.toString();
+// console.log(str);
 
 // Output :
 // { name: 'Adil Ahamad', email: 'adilahamad@email.com' }
 // {"name":"Adil Ahamad","email":"adilahamad@email.com"}
 // { name: 'Adil Ahamad', email: 'adilahamad@email.com' }
 // [object Undefined]
+
+
+
+const event1 = {
+  name: "Birthday Party",
+  guestList: ["Andrew", "Jen", "Mike"],
+  printGuestList() {
+    console.log("Guest list for " + this.name);
+
+    this.guestList.forEach((guest) => {
+      console.log(guest + " is attending " + this.name);
+    });
+  },
+};
+event1.printGuestList();
+// Output :
+// Guest list for Birthday Party
+// Andrew is attending Birthday Party
+// Jen is attending Birthday Party
+// Mike is attending Birthday Party
+
+const event2 = {
+    name: "Birthday Party",
+    guestList: ["Andrew", "Jen", "Mike"],
+    printGuestList() {
+      console.log("Guest list for " + this.name);
+  
+      this.guestList.forEach(function (guest) {
+        console.log(guest + " is attending " + this.name);
+      });
+    },
+};
+event2.printGuestList();
+  // Output :
+// Guest list for Birthday Party
+// Andrew is attending undefined
+// Jen is attending undefined
+// Mike is attending undefined
