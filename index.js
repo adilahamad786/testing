@@ -113,24 +113,24 @@ const async = require('async');
 // Output : [ 'Value', 'Val', 'va' ]
 
 
-let queue = async.queue((task, callback) => {
-    // if (task.task === "My task 3") { throw Error("Task is failed!") }
-    console.log(task);
-    if (task.fun)
-        task.fun();
-    callback();
-}, 1)
+// let queue = async.queue((task, callback) => {
+//     // if (task.task === "My task 3") { throw Error("Task is failed!") }
+//     console.log(task);
+//     if (task.fun)
+//         task.fun();
+//     callback();
+// }, 1)
 
-queue.drain(() => console.log("All task completed!"));
+// queue.drain(() => console.log("All task completed!"));
 
 // queue.error(function (error, task) { console.log("An error is occuring!") });
 
-queue.push({ task : "My task 1"})
-queue.push({ task : "My task 2"}, function () { console.log("My task 2 is finished!")})
-queue.push({ task : "My task 3"}, function (error) { if (error) { console.log("My task 3 has failed!")} })
-queue.push({ task : "My task 4"})
-queue.push({ task : "My task 5"})
-queue.push({ fun : () => console.log("This is a function task!")})
+// queue.push({ task : "My task 1"})
+// queue.push({ task : "My task 2"}, function () { console.log("My task 2 is finished!")})
+// queue.push({ task : "My task 3"}, function (error) { if (error) { console.log("My task 3 has failed!")} })
+// queue.push({ task : "My task 4"})
+// queue.push({ task : "My task 5"})
+// queue.push({ fun : () => console.log("This is a function task!")})
 
 // Output :
 // { task: 'My task 1' }
@@ -142,3 +142,28 @@ queue.push({ fun : () => console.log("This is a function task!")})
 // { fun: [Function: fun] }
 // This is a function task!
 // All task completed!
+
+
+async.waterfall([
+    function(callback) {
+        console.log("First")
+        callback(null, 'one', 'two');
+    },
+    function(arg1, arg2, callback) {
+        // arg1 now equals 'one' and arg2 now equals 'two'
+        console.log("Second", arg1, arg2)
+        callback(null, 'three');
+    },
+    function(arg1, callback) {
+        // arg1 now equals 'three'
+        console.log("Third", arg1)
+        callback(null, 'done');
+    }
+], function (err, result) {
+    // result now equals 'done'
+});
+
+// Output :
+// First
+// Second one two
+// Third three
