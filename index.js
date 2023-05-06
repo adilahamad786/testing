@@ -171,10 +171,10 @@ const async = require('async');
 
 // Taking input using command line arguments
 
-let inputFromArguemnt = process.argv;
-console.log(inputFromArguemnt);
-console.log(process.argv[2]);
-console.log(process.argv[3]);
+// let inputFromArguemnt = process.argv;
+// console.log(inputFromArguemnt);
+// console.log(process.argv[2]);
+// console.log(process.argv[3]);
 
 // Input : node index.js firstArgInput secondArgInput
 
@@ -187,3 +187,27 @@ console.log(process.argv[3]);
 // ]
 // firstArgInput
 // secondArgInput
+
+
+
+// Working with JSON data and Object Literals, JSON, which stands for JavaScript Object Notation
+let objectLiteral = {
+    name : "Adil Ahamad",
+    email : "adilahamad@email.com"
+}
+console.log(objectLiteral);
+
+let convertIntoJson = JSON.stringify(objectLiteral);
+console.log(convertIntoJson);
+
+let convertIntoObjectLiteral = JSON.parse(convertIntoJson);
+console.log(convertIntoObjectLiteral);
+
+let str = toString(objectLiteral); // objectLiteral.toString();
+console.log(str);
+
+// Output :
+// { name: 'Adil Ahamad', email: 'adilahamad@email.com' }
+// {"name":"Adil Ahamad","email":"adilahamad@email.com"}
+// { name: 'Adil Ahamad', email: 'adilahamad@email.com' }
+// [object Undefined]
