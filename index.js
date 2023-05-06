@@ -79,14 +79,35 @@ let result2 = Promise.any([myPromise3]); // When all promises are rejected
 
 
 let result3 = Promise.race([myPromise1, myPromise2, myPromise3]);
-result3
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+// result3
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err));
 // Output : Promise has resolved!
 
 let result4 = Promise.race([myPromise3, myPromise2, myPromise1]);
-result4
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+// result4
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err));
 // Output : Promise has rejected!
 
+
+// USING async UTILITY MODULE
+const async = require('async');
+
+let parallel = async.parallel([
+    function fun(cb) {
+        cb(null, "Value")
+    },
+    function (cb) {
+        cb(null, "Val")
+    },
+    (cb) => cb(null, "va")
+], function (error, result) {
+    if (error)
+        console.log(error);
+    else
+        console.log(result);
+})
+
+console.log(parallel);
+// Output : [ 'Value', 'Val', 'va' ]
